@@ -1,0 +1,38 @@
+create database project;
+
+use project;
+
+create table Users(
+	userID int PRIMARY KEY NOT NULL auto_increment,
+	username varchar(100),
+    email varchar(100),
+    password varchar(100),
+    usertype varchar(10)
+);
+
+create table Product(
+	productID int PRIMARY KEY NOT NULL auto_increment,
+	productName varchar(100),
+    productPrice int,
+    productQuantity int,
+    productImage varchar(255)
+);
+
+create table Cart(
+	userID int,
+	productID varchar(100),
+    quantity int
+);
+
+create table Orders(
+	userID int,
+	productID int,
+	productName varchar(100),
+    productPrice int,
+    productQuantity int
+);
+
+ALTER TABLE `cart` ADD CONSTRAINT chk_qty CHECK (`quantity` > 0);
+
+insert into Users values(1, 'Manager', 'Manager@company.com', '$2a$08$4zycBiyk0YdoADUZRZBw0OEMITcUKOKmCattaRtRBK/uHrO9l/h2O', 'manager');
+insert into Users values(2, 'Worker 1', 'Worker_1@company.com', '$2a$08$ENLoHw1GzGX1Epu.wa8I5utOuyp1Arz6.3T6aDCkEadSEwOUc7s32', 'worker');

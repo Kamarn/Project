@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    depends_on:
+      - mysqldb
+    build: ../project
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:5000
+    environment:
+      - DB_HOST=127.0.0.1
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=project
+      - DB_PORT=3306
+    stdin_open: true
+    tty: true
+
+  mysqldb:
+    image: mysql:8.0
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=project
+    ports:
+      - $MYSQLDB_LOCAL_PORT:3306
+    volumes:
+      - db:/var/lib/mysql
+  
+volumes: 
+  db:
