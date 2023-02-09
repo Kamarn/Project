@@ -67,7 +67,7 @@ exports.login = (req, res) => {
 
     if( !email || !password ){
         return res.render('login', {
-            message: 'Incomplete information entered'
+            message: 'Incomplete information entered!'
 
         });
     }
